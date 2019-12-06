@@ -1,0 +1,86 @@
+<!-- Temperature icon -->
+<div *ngIf="type == 'Temperature'">
+    <div class="temperature icon shadow-sm p-3 rounded text-center">
+        <i class="fas fa-thermometer-half fa-4x"></i>
+    </div>
+</div>
+
+<!-- Humidity icon -->
+<div *ngIf="type == 'Humidity'">
+    <div class="humidity icon shadow-sm p-3 rounded text-center">
+        <i class="fas fa-water fa-4x"></i>
+    </div>
+</div>
+
+<!-- Dust icon -->
+<div *ngIf="type == 'Dust Density'">
+    <div class="dust icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon     -->
+        <i class="fas fa-braille fa-3x"></i>
+    </div>
+</div>
+
+<!-- Water icon -->
+<div *ngIf="type == 'Water Level'">
+    <div class="water icon shadow-sm p-3 rounded text-center">
+        <i class="fas fa-tint fa-4x"></i>
+    </div>
+</div>
+
+<!-- Pressure icon -->
+<div *ngIf="type == 'Pressure'">
+    <div class="pressure icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon -->
+        <i class="fab fa-cloudscale fa-4x"></i>
+    </div>
+</div>
+
+<div *ngIf="type == 'door-settings'">
+    <div class="door-settings icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon -->
+        <i class="fas fa-sun fa-4x"></i>
+    </div>
+</div>
+
+<div *ngIf="type == 'Sunrise'">
+    <div class="sunrise icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon -->
+        <i class="fas fa-sun fa-4x"></i>
+    </div>
+</div>
+
+<div *ngIf="type == 'Sunset'">
+    <div class="sunset icon shadow-sm p-3 rounded text-center">
+        <img class="sunset-img" src="/assets/img/sunrise.svg">
+    </div>
+    <!-- This icon was made by https://www.flaticon.com/authors/yannick CCBYSA -->
+</div>
+
+<div *ngIf="type == 'Door Close Time'">
+    <div class="close-icon icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon -->
+        <i class="fas fa-door-closed fa-3x"></i>
+    </div>
+</div>
+
+
+<div *ngIf="type == 'Door Open Time'">
+    <div class="open-icon icon shadow-sm p-3 rounded text-center">
+        <!-- TODO: Get better icon -->
+        <i class="fas fa-door-open fa-3x"></i>
+    </div>
+</div>
+
+<div *ngIf="type == 'Egg'">
+    <div class="egg-icon icon shadow-sm p-3 rounded text-center">
+        <i class="pt-2 fas fa-egg fa-3x"></i>
+    </div>
+</div>
+
+<div *ngIf="type == 'hub'">
+    <div class="hub icon shadow-sm p-3 rounded text-center">
+        <i class="fas fa-sitemap fa-3x"></i>
+    </div>
+</div>
+
+<!-- TODO: add click to historical -->

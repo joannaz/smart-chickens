@@ -1,0 +1,63 @@
+mat-sidenav-container {
+    height: 100vh;
+}
+
+.display-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: relative;
+    min-height: 100vh;
+    h1 {
+        margin-left: 8px;
+        color: #ffffff;
+    }
+    
+    .mat-card-avatar {
+        height: 100px;
+        width: 100px;
+    }
+    .white-icon {
+        color: white;
+    }
+    .user-icon {
+        display: inline-block;
+    }
+    .footer {
+        color: grey;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .sidenav-container {
+        /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+         causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+        flex: 1;
+        width: 100vw;
+      }
+}
+
+mat-sidenav {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.is-mobile {
+    .sidenav-container {
+        /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+        `<body>` to be our scrolling element for mobile layouts. */
+        flex: 1 0 auto;
+    }
+    .toolbar {
+        position: fixed;
+        /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+        z-index: 2;
+    }
+}
+

@@ -1,0 +1,95 @@
+.settings-card {
+    width: 700px;
+    display: inline-block;
+}
+.card-section{
+    width: 400px;
+    text-align: left;
+    display: inline-block;
+}
+
+.add-email {
+    color: white;
+}
+
+.card-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.button {
+    color: white;
+}
+
+.emails:hover {
+    background: rgba(0, 0, 0, 0.04);
+    cursor: default;
+}
+
+.delete {
+    float: right;
+    cursor: pointer;
+}
+
+.fa-trash {
+    color: grey;
+}
+
+.user-icon {
+    max-height: 150px;
+    max-width: 180px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.error {
+    color: #f44336;
+}
+
+.fa-check-circle {
+    color: #4caf50
+}
+
+.email-mgmt {
+    height: auto;
+}
+
+.success {
+    height: 200px;
+    .inner {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+}
+
+.my-drop-zone {
+    border: dotted 3px lightgray;
+    width: 100%;
+    height: 150px;
+    display: table;
+    .upload-text {
+      display: table-cell; 
+      vertical-align: middle;
+      color: grey;
+    }
+}
+
+.nv-over-class {
+    border: dotted 3px #4caf50 !important;
+}
+
+/* Default class applied to drop zones on over */
+
+@media (max-width: 992px) { 
+    .card-section {
+        width: 100%;
+    }
+    .settings-card {
+        width: 100%;
+    }
+ }

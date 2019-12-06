@@ -1,0 +1,21 @@
+<div class="container p-4" *ngIf="codes">
+    <div class="row">
+        <div class="col-md-11 col-12">
+            <mat-tab-group class="tabs" [selectedIndex]="selected.value" (selectedTabChange)="changeCode($event)">
+                <div *ngFor="let c of codes"> <!-- Loop through the array and put them on the tabs -->
+                    <mat-tab label="{{c.name}}"></mat-tab>
+                </div>
+            </mat-tab-group>
+        </div>
+<!-- Button to add new snippet -->
+        <div class="col-md-1 col-12">
+            <div class="text-right add-button">
+                <button (click)="addTab()" class="button mt-2" mat-flat-button color="primary">ADD</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- Display child code editing component -->
+    <code-editor (updateTotal)="reload($event)" (updateLocal)="removeTab($event)" [code]="code" [index]="index">
+    </code-editor>
+</div>

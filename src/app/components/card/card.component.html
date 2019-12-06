@@ -1,0 +1,34 @@
+<!-- Use the Material Card component to render this card -->
+<mat-card class="card">
+    <mat-card-content>
+      <!-- Render the icon, passing in the name of the data type to CardIconComponent -->
+      <div>
+        <card-icon [type]="data.name"></card-icon>
+      </div>
+      <!-- Name of the data for clarity -->
+      <mat-card-subtitle class="text-right">{{data.name}}</mat-card-subtitle>
+      <!-- Display the actual value -->
+        <mat-card-title>
+        <div class="data text-right">
+          <span class="value">{{data.value}}</span>
+            <!-- Display the unit -->
+            <span *ngIf="data.name == 'Temperature'"><span class="unit">°C</span></span>
+            <span *ngIf="data.name == 'Humidity'"><span class="unit">%</span></span>
+            <span *ngIf="data.name == 'Dust Density'"><span class="unit">μg/m³</span></span>
+            <span *ngIf="data.name == 'Pressure'"><span class="unit">mBar</span></span>
+          </div>
+        </mat-card-title>
+
+        <hr>
+        <!-- Let the user know when it was last updated -->
+        <mat-card-subtitle *ngIf="!noTime"> 
+          <span *ngIf="data.name != 'Water Level'"> 
+          <i *ngIf="!updating" (click)="onClick(data.name)"class="fas fa-sync-alt"></i> 
+          <i *ngIf="updating" class="fas fa-spinner fa-spin"></i> 
+        
+        </span> 
+          
+          Last updated: {{data.time | timeago:live }}</mat-card-subtitle>
+        <div *ngIf="noTime"></div>
+    </mat-card-content>
+  </mat-card>

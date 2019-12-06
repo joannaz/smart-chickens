@@ -1,0 +1,112 @@
+<div class="setup">
+    <div class="mt-5 container">
+        <mat-card class="mt-5">
+            <mat-horizontal-stepper class="stepper" [linear]="true" #stepper>
+                <!-- Ask for IP address of HUB  -->
+                <mat-step [completed]="doneStep1">
+                    <ng-template matStepLabel class="mat-step-label"> Welcome</ng-template>
+                    <p class="pt-3 mt-4">Thank you for installing Coop Control.</p>
+                    <p>Please enter the URL of your hub. </p>
+                    <mat-form-field>
+                        <input (keydown)="validateStepOne()" matInput [(ngModel)]="hubUrl" placeholder="Hub URL"
+                            required>
+                    </mat-form-field>
+                    <div class="text-right p-3">
+                        <button mat-flat-button class="button" color="primary" matStepperNext>NEXT</button>
+                    </div>
+                </mat-step>
+
+                <!-- Ask for user location  -->
+                <mat-step [completed]="doneStep2">
+                    <ng-template matStepLabel>Location</ng-template>
+                    <div class="map-wrapper pt-3 mt-4">
+                        <div class="mat-title"> Set your coop location: </div>
+                        <p> Click your location on the map. </p>
+                        <div class="map" (leafletMapReady)="onMapReady($event)" leaflet [leafletOptions]="options"
+                            [leafletLayers]="markers" (leafletClick)="moveMarker('click', $event)">
+                        </div>
+                    </div>
+                    <div class="text-right p-3">
+                        <button mat-flat-button class="mr-2" matStepperPrevious>BACK</button>
+                        <button mat-flat-button class="button" color="primary" matStepperNext>NEXT</button>
+                    </div>
+                </mat-step>
+
+                <!-- Set default admin pw -->
+                <mat-step [completed]="doneStep3">
+                    <ng-template matStepLabel>System</ng-template>
+                    <p>The system account manages your location and users, alongside running code snippets.</p>
+                    <p>Please enter a password for this account. </p>
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="password" type="password" placeholder="password" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="confirmPassword" type="password"
+                                placeholder="confirm passsword" required>
+                        </mat-form-field>
+
+                        <div class="error" *ngIf="err">
+                            {{err}}
+                        </div>
+                        <div class="text-right p-3">
+                            <button mat-flat-button class="mr-2" matStepperPrevious>BACK</button>
+                            <button mat-flat-button class="button" color="primary"
+                                (click)="validateSystemPassword(stepper)">NEXT</button>
+                        </div>
+                    </div>
+                </mat-step>
+
+                <!-- Explain how to code -->
+                <mat-step>
+                    <ng-template matStepLabel>Code</ng-template>
+                    <p class="pt-3 mt-4">This system allows you to "code" events. We have supplied template code snippets for you to use
+                        and adapt. Simply use our code UI to edit and change the code, as shown below. </p>
+                    <div class="text-center py-4">
+                        <img class="tut-img" src="../../../assets/img/code-tut.png">
+                    </div>
+                    <p>
+                        Please remember, you can only have one active snippet at a single time.
+                    </p>
+                    <div class="text-right p-3">
+                        <button mat-flat-button class="mr-2" matStepperPrevious>BACK</button>
+                        <button mat-flat-button class="button" color="primary" matStepperNext>NEXT</button>
+                    </div>
+                </mat-step>
+
+                <!-- Explain User Management -->
+                <mat-step>
+                    <ng-template matStepLabel>User Management</ng-template>
+                    <p class="pt-3 mt-4">Your family and friends can create accounts on this system to help you manage your chickens.
+                        However, you will need to approve them. You can do this by logging into your system account
+                        and accessing the User Management page.
+                    </p>
+                    <div class="text-center py-4">
+                        <img class="tut-img" src="../../../assets/img/user-tut.png">
+                    </div>
+                    <p>
+                        If they also need door control, you are able to set the permissions here.
+                    </p>
+                    <div class="text-right p-3">
+                        <button mat-flat-button class="mr-2" matStepperPrevious>BACK</button>
+                        <button mat-flat-button class="button" color="primary" matStepperNext>NEXT</button>
+                    </div>
+                </mat-step>
+
+                <!-- Finalize -->
+                <mat-step>
+                    <ng-template matStepLabel>Finalize</ng-template>
+                    <p class="pt-3 mt-4">That's it, your Coop Control is now set up and ready for you to use. </p>
+                    <p>Have a clucking good time bro 🤙 </p>
+                    <div class="text-right p-3">
+                        <button mat-flat-button class="mr-2" matStepperPrevious>BACK</button>
+                        <button mat-flat-button class="button" color="primary" (click)="finish()">FINISH</button>
+                    </div>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </mat-card>
+    </div>
+</div>

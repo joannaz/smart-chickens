@@ -1,0 +1,121 @@
+<div class="container-fluid pt-4 admin-set">
+    <div class="time col-md-4 col-12 text-center">
+
+        <mat-card class="card text-left">
+            <mat-card-content>
+                <!-- Render the icon, passing in the name of the data type to CardIconComponent -->
+                <!-- Section to set door close / open times -->
+                <div>
+                    <card-icon [type]="'door-settings'"></card-icon>
+                </div>
+                <div class="">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="open" placeholder="Door Open Time"
+                            aria-label="Door Open Time" [ngxTimepicker]="openTime" [format]="24" readonly>
+                    </mat-form-field>
+                    <ngx-material-timepicker #openTime (timeSet)="changeTime($event)"></ngx-material-timepicker>
+                </div>
+
+                <div class="">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="close" placeholder="Door Close Time" aria-label="Door Close Time"
+                            [ngxTimepicker]="closeTime" [format]="24" readonly>
+                    </mat-form-field>
+                    <ngx-material-timepicker #closeTime (timeSet)="changeTime($event)"></ngx-material-timepicker>
+                </div>
+
+                <div class="pb-2 red" *ngIf="close == '' && open == ''">
+                    Custom Automation is off.
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mt-5 card text-left">
+            <mat-card-content>
+                <!-- Render the icon, passing in the name of the data type to CardIconComponent -->
+                <!-- Section to set hub url -->
+                <div>
+                    <card-icon [type]="'hub'"></card-icon>
+                </div>
+                <div class="pt-5 mt-2">
+                    <mat-form-field>
+                        <input matInput (keypress)="changeUrl()" placeholder="Hub IP" [(ngModel)]="hubUrl">
+                    </mat-form-field>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+        <div class="save p-4 text-center">
+            <button *ngIf="close == '' && open == ''" disabled class="button next" mat-raised-button color="primary">CLEAR TIME</button>
+            <button *ngIf="close != '' || open != ''" (click)="clearTime()" class="button next" mat-raised-button color="primary">CLEAR TIME</button>
+            <button *ngIf="tFieldChange && !tLoading" (click)="saveTime()" mat-flat-button color="primary"
+                class="m-3 button">SAVE</button>
+            <button *ngIf="!tFieldChange && !tLoading" class="m-3" mat-flat-button disabled>SAVE</button>
+            <i *ngIf="tLoading" class="m-3 fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+        </div>
+
+        <mat-card class="card card-password text-left">
+
+                <p class="card-title py-2"> Change Your Password</p>
+                <div class="mt-2">
+                    <!-- ENTER OLD PASSWORD SECTION  -->
+                    <div *ngIf="steps == 1" class="existing-pw">
+                        <p>Enter existing password:</p>
+                        <div class="">
+                            <mat-form-field (keydown)="keyDownFunctionPassword($event)" class="mt-1 full-width">
+                                <input [(ngModel)]="password" matInput type="password" placeholder="Password">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- NEW PASWORD SECTION  -->
+                    <div class="new-pw" *ngIf="steps == 2" (keydown)="keyDownFunctionPasswordSave($event)">
+                        <p>Enter new password</p>
+                        <mat-form-field class="mt-1 full-width">
+                            <input [(ngModel)]="newPassword" matInput type="password" placeholder="New Password">
+                        </mat-form-field>
+
+                        <mat-form-field class="mt-1 full-width">
+                            <input [(ngModel)]="confirmPassword" matInput type="password" placeholder="Confirm New Password">
+                        </mat-form-field>
+
+                        <div class="text-center error" *ngIf="passwordErr">
+                            Both passwords must match to continue.
+                        </div>
+                    </div>
+
+                    <div *ngIf="steps == 3" class="success text-center">
+                        <div class="inner">
+                            <p *ngIf="success">Password Succesfully Updated</p>
+                            <p *ngIf="!success">Unable to update password, please contact your administrator.</p>
+                            <i class="fas fa-check-circle fa-3x"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="text-right">
+                    <button *ngIf="steps == 1" (click)="checkPassword()" class="button next" mat-raised-button color="primary">NEXT</button>
+                    <button *ngIf="steps == 2" (click)="changePassword()" class="button" mat-raised-button color="primary">SAVE</button>
+
+                </div>
+
+            </mat-card>
+
+
+    </div>
+
+    <!-- Section to change coop location -->
+    <div class="map-wrapper col-md-8 col-12">
+        <div class="mat-title"> Change your coop location: </div>
+        <div class="map" leaflet [leafletOptions]="options" [leafletLayers]="markers"
+            (leafletClick)="moveMarker('click', $event)">
+        </div>
+        <div class="save-2 text-center">
+            <button *ngIf="fieldChange && !loading" (click)="save()" mat-flat-button color="primary"
+                class="m-3 button">SAVE</button>
+            <button *ngIf="!fieldChange && !loading" class="m-3" mat-flat-button disabled>SAVE</button>
+            <i *ngIf="loading" class="m-3 fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="top-bar row">
+    <!-- Input field to change name of code snippet -->
+    <div class="col">
+        <mat-form-field class="pt-5 input-title top-item">
+            <input matInput (keypress)="change()" placeholder="Code Snippet Title" [(ngModel)]="_code.name" pattern="[a-zA-Z0-9 ]{4,32}"
+                required>
+        </mat-form-field>
+    </div>
+</div>
+
+<!-- Display the code snippet in code mirror -->
+<div class="code-mirror pt-4" *ngIf="_code">
+    <ngx-codemirror [(ngModel)]="_code.code" (keypress)="change()" [options]="{
+            lineNumbers: true,
+            theme: 'default',
+            mode: 'javascript'
+        }">
+    </ngx-codemirror>
+</div>
+
+<!-- Display compile message if there is one -->
+<div class="save text-center mt-4 error">
+    <div *ngIf="compileErr">
+        {{compileErrMsg}}
+    </div>
+</div>
+
+<!-- Buttons -->
+<div class="save text-right">
+    <div *ngIf="fieldChange">
+        <button (click)="delete()" mat-flat-button color="warn" class="m-3 button-small">DELETE</button>
+        <button (click)="save()" mat-flat-button color="primary" class="m-3 button-small">SAVE</button>
+        <button *ngIf="!_code?.is_active" class="m-3 button" mat-flat-button disabled>SAVE AND SEND TO HUB</button>
+        <button *ngIf="_code?.is_active" class="m-3 button" mat-flat-button disabled>SAVE AND DELETE FROM HUB</button>
+    </div>
+    <div *ngIf="!fieldChange">
+        <button (click)="delete()" mat-flat-button color="warn" class="m-3 button-small">DELETE</button>
+        <button (click)="save()" mat-flat-button color="primary" class="m-3 button-small">SAVE</button>
+        <button *ngIf="!_code?.is_active" (click)="updateHub()" mat-flat-button color="primary" class="m-3 button">SAVE AND SEND TO HUB</button>
+        <button *ngIf="_code?.is_active" (click)="updateHub()" mat-flat-button color="warn" class="m-3 button">SAVE AND DELETE FROM HUB</button>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="door text-center container-fluid py-5">
+
+    <card class="m-4" [data]="sunrise" [noTime]="true"></card>
+    <card class="m-4" [data]="sunset" [noTime]="true"></card>
+    <card class="m-4" [data]="open" [noTime]="true"></card>
+    <card class="m-4" [data]="close" [noTime]="true"></card>
+
+    <div class="m-4 pt-1">
+        <!-- Use the Material Card component to render this card -->
+        <mat-card class="card door-control">
+            <mat-card-content>
+                <!-- Render the icon, passing in the name of the data type to CardIconComponent -->
+                <div>
+                    <card-icon [type]="open.name"></card-icon>
+                </div>
+                <!-- Name of the data for clarity -->
+                <mat-card-subtitle class="text-right">Door Status </mat-card-subtitle>
+                <!-- Display the actual value -->
+                <mat-card-title>
+                    <div class="data text-right">
+                        <span class="value">{{ doorStatus }}</span>
+                    </div>
+                </mat-card-title>
+                <mat-card-subtitle class="text-right" *ngIf="door">
+                    Changed {{doorUpdated}} {{reason}}.
+                </mat-card-subtitle>
+                <hr>
+                <!-- Let the user know when it was last updated -->
+                <mat-card-subtitle class="text-right" *ngIf="door && doorControl">
+                    <button *ngIf="door.value == 'closed' && !doorLoading && !doorSuccess && !doorErr" mat-stroked-button color="primary" (click)="openDoor()" class="">OPEN DOOR</button>
+                    <button *ngIf="door.value == 'open' && !doorLoading && !doorSuccess && !doorErr" mat-stroked-button color="primary" (click)="closeDoor()" class="">CLOSE DOOR</button>
+                    <button *ngIf="door.value != 'open' && door.value != 'closed' && !doorLoading && !doorSuccess && !doorErr" mat-stroked-button color="primary" class="" disabled>ERROR</button>
+                    <div *ngIf="doorLoading && !doorSuccess" ><i class="fas fa-2x fa-spinner fa-spin"></i></div>
+                    <div *ngIf="doorSuccess && !doorLoading" ><i class="fas fa-2x fa-check-circle"></i></div>
+                    <div *ngIf="doorErr" class="error">Error: {{doorErrMsg}}</div>
+                    <!-- Spinning thing  -->
+                    <!-- Tick -->
+                </mat-card-subtitle>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <card-section class="m-4 pt-2" ></card-section>
+</div>

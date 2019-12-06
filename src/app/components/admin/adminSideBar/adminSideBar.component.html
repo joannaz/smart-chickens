@@ -1,0 +1,41 @@
+  <!-- Add is-mobile to the CSS class if the user is on a mobile -->
+  <div class="display-container" [class.is-mobile]="mobileQuery.matches">
+  <!-- Angular material toolbar -->
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon class="white-icon">menu</mat-icon>
+      </button>
+      <h1>{{title}}</h1>
+    </mat-toolbar>
+  
+    <!-- Resize side bar if on mobile -->
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <!-- Use "over" mode if on mobile, and "side" if on desktop. Default open sidebar on desktop, clsoed on mobile -->
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
+        [opened]="mobileQuery.matches ? false : true">
+        <!-- Items in the side bar -->
+        <mat-nav-list class="text-center">
+          <img mat-card-avatar src="../../../assets/img/{{currentUser.userObj.username}}.png" class="user-icon my-2">
+          
+          <h4 mat-list-item class="my-2 mb-3">{{currentUser.userObj.name}}</h4>
+          <hr>
+          <a mat-list-item routerLink="/system/dashboard"> <i class="fas fa-cog pr-4"></i> Settings </a>
+          <a mat-list-item routerLink="/system/language"> <i class="fas fa-code pr-4"></i> Programmer </a>
+          <a mat-list-item routerLink="/system/users"> <i class="fas fa-users pr-4"></i> User Management </a>
+          <a mat-list-item (click)="logout()"> <i class="fas fa-sign-out-alt pr-4"></i> Log Out </a>
+        </mat-nav-list>
+        <p class="footer text-center">ver 1.0 - {{year}}</p>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <!-- Render the component the URL points to (e.g. /dashboard will load dashboard.component as defined in app-routing.module) -->
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+    </div>
+  
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

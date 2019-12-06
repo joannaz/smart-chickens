@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Delete email?</h2>
+<mat-dialog-content>Are you sure you want to delete {{data.emailString}} ? </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>CANCEL</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>DELETE</button>
+</mat-dialog-actions>

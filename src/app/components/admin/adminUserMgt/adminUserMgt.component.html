@@ -1,0 +1,100 @@
+<div class="container pt-5">
+
+    <ngx-datatable
+    #mydatatable
+    class="material management"
+    [headerHeight]="50"
+    [limit]="5"
+    [columnMode]="'force'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [rows]="rows">
+
+    <ngx-datatable-column name="Username">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <span
+          title="Double click to edit"
+          (dblclick)="editing[rowIndex + '-username'] = true"
+          *ngIf="!editing[rowIndex + '-username']">
+          {{value}}
+        </span>
+        <input
+          autofocus
+          (blur)="updateValue($event, 'username', rowIndex)"
+          *ngIf="editing[rowIndex+ '-username']"
+          type="text"
+          [value]="value"
+        />
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Name">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+         <span
+          title="Double click to edit"
+          (dblclick)="editing[rowIndex + '-name'] = true"
+          *ngIf="!editing[rowIndex + '-name']">
+          {{value}}
+        </span>
+        <input
+          autofocus
+          (blur)="updateValue($event, 'name', rowIndex)"
+          *ngIf="editing[rowIndex+ '-name']"
+          type="text"
+          [value]="value"
+        />
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Verified">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+               <span
+                title="Double click to edit"
+                (dblclick)="editing[rowIndex + '-verified'] = true"
+                *ngIf="!editing[rowIndex + '-verified']">
+                {{value}}
+              </span>
+              <select
+                *ngIf="editing[rowIndex + '-verified']"
+                (blur)="editing[rowIndex + '-verified'] = false"
+                (change)="updateValue($event, 'verified', rowIndex)"
+                [value]="value">
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </ng-template>
+          </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Door Control" prop="door_control">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+               <span
+                title="Double click to edit"
+                (dblclick)="editing[rowIndex + '-door_control'] = true"
+                *ngIf="!editing[rowIndex + '-door_control']">
+                {{value}}
+              </span>
+              <select
+                *ngIf="editing[rowIndex + '-door_control']"
+                (blur)="editing[rowIndex + '-door_control'] = false"
+                (change)="updateValue($event, 'door_control', rowIndex)"
+                [value]="value">
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </ng-template>
+          </ngx-datatable-column>
+
+        <ngx-datatable-column prop="username" name="Delete">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                <span
+                title="Click to delete"
+                (click)="delete(value)">
+                <i class="pl-2 fas fa-trash"></i>
+                </span>
+            </ng-template>
+            </ngx-datatable-column>
+
+  </ngx-datatable>
+</div>

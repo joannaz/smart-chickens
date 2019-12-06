@@ -1,0 +1,66 @@
+<!-- If user is not authenticated -->
+<div class="register">
+
+    <mat-card class="register-card">
+        <mat-card-header class="register-header">
+            <mat-card-title class="register-title">REGISTER</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+            <div (keydown)="keyDownFunction($event)" *ngIf="!submitted" class="register-form mx-3 mt-3 pt-3">
+
+                <mat-form-field class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput title="Username must be a minimum of 4 characters, max of 32" alt="Enter your new username" placeholder="username"
+                        [(ngModel)]="username" name="username" pattern="[a-zA-Z0-9]{4,32}" required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input alt="Enter your name for your new account" matInput placeholder="Name" [(ngModel)]="name" name="name" pattern="[a-zA-Z0-9 ]{1,128}"
+                        title="Name must only contain alphanumeric characters" required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" [(ngModel)]="email" name="email" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+(.[a-zA-Z0-9._-]+)?"
+                        required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width pt-3">
+                    <mat-label>Password</mat-label>
+                    <input alt="Enter your password for your new account" matInput placeholder="Password" [(ngModel)]="password" type="password"
+                        name="password" pattern="[a-zA-Z0-9 ]{8,128}" title="Password must be a minimum of length 8 and max of 128. Accepts ONLY alphanumeric characters."
+                        required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width pt-3">
+                    <mat-label>Confirm Password</mat-label>
+                    <input alt="Confirm your password for your new account" matInput placeholder="Password" [(ngModel)]="cpassword" type="password"
+                        name="password" required>
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="submitted && success" class="success mx-3 mt-3 pt-3">
+                <div>
+                    <p>Registration Successful. Please wait for your admin to authorize you. </p>
+                    <button type="button" class="register-button" routerLink="/login" mat-flat-button color="primary"> Back to Login</button>
+                </div>
+            </div>
+            <div *ngIf="submitted && !success" class="success mx-3 mt-3 pt-3">
+                <p>Error signing up. Please contact your admin. </p>
+            </div>
+            <div class="error" *ngIf="err && !submitted">
+                {{errMsg}}
+            </div>
+
+
+        </mat-card-content>
+        <mat-card-actions *ngIf="!submitted" class="pt-4">
+            <button type="button" class="register-button" mat-flat-button color="primary" (click)="register()"> REGISTER </button>
+
+        </mat-card-actions>
+        <mat-card-subtitle *ngIf="!submitted" routerLink="/login"> Login </mat-card-subtitle>
+    </mat-card>
+
+</div>

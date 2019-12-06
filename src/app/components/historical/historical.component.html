@@ -1,0 +1,54 @@
+<div class="container-fluid pt-4">
+
+            <mat-card class="card">
+                <mat-card-title>Water</mat-card-title>
+                <div class="pt-5 mt-5" style="display: block;">
+                    <google-chart  [dynamicResize]="true" *ngIf="waterData" [options]="waterOptions" [columnNames]="waterColumnNames" 
+                    [data]="waterData" [type]="timeLineType"  #waterChart></google-chart>
+                </div>
+            </mat-card>
+      
+            <mat-card class="card">
+                <mat-card-title>Pressure</mat-card-title>
+                <div style="display: block;">
+                    <canvas height="200%" baseChart [datasets]="presData" [labels]="presLabels" [options]="lineChartOptions"
+                        [colors]="presColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                </div>
+            </mat-card>
+       
+            <mat-card class="card">
+                <mat-card-title>Dust</mat-card-title>
+                <div style="display: block;">
+                    <canvas height="200%" baseChart [datasets]="dustData" [labels]="dustLabels" [options]="lineChartOptions"
+                        [colors]="dustColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                </div>
+            </mat-card>
+
+
+
+    
+            <mat-card class="card">
+                <mat-card-title>Temperature</mat-card-title>
+                <div style="display: block;">
+                    <canvas height="200%" baseChart [datasets]="tempData" [labels]="tempLabels" [options]="lineChartOptions"
+                        [colors]="tempColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                </div>
+            </mat-card>
+       
+            <mat-card class="card">
+                <mat-card-title>Humidity</mat-card-title>
+                <div style="display: block;">
+                    <canvas height="200%" baseChart [datasets]="humidData" [labels]="humidLabels" [options]="lineChartOptions"
+                        [colors]="humidColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                </div>
+            </mat-card>
+        
+            <mat-card class="card">
+                <mat-card-title>Door State</mat-card-title>
+                <div class="pt-5 mt-5" style="display: block;">
+                    <google-chart  [dynamicResize]="true" *ngIf="doorData" [options]="doorOptions" [columnNames]="doorColumnNames" 
+                    [data]="doorData" [type]="timeLineType"  #chart></google-chart>
+                </div>
+            </mat-card>
+       
+</div>

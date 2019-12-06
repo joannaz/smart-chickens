@@ -1,0 +1,30 @@
+<!-- If user is not authenticated -->
+<div class="login">
+    <mat-card class="login-card">
+        <mat-card-header class="login-header">
+            <mat-card-title class="login-title">LOGIN</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form (keydown)="keyDownFunction($event)" class="login-form m-3 pt-3">
+                <mat-form-field class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                </mat-form-field>
+                <mat-form-field class="full-width pt-3">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+                </mat-form-field>
+            </form>
+            <div *ngIf="error" class="mb-3">
+                <span class="error">{{error}} </span>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="login-button mt-2" mat-flat-button color="primary" (click)="login()"> LOG IN </button>
+        </mat-card-actions>
+        <mat-card-subtitle> Forgot your password? </mat-card-subtitle>
+        <mat-card-subtitle routerLink="/register" > Register </mat-card-subtitle>
+
+</mat-card>
+
+</div>
