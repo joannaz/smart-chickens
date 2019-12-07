@@ -7,7 +7,7 @@ The visualisation web aspect of my final year project.
 
 ###### Master
 
-This is the default branch that was submitted. It uses JWT to authenticate with an express.js backend. More info can be found here.
+This is the default branch that was submitted. It uses JWT to authenticate with an express.js backend. More info can be found [here](https://joannaz.github.io/corpus/#header-n4366).
 
 ###### Staging
 
