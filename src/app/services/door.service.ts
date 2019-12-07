@@ -39,6 +39,13 @@ export class DoorService {
     return this.http.put<boolean>(`${this.env.apiUrl}/system/updateDoorSettings`, {open_door, close_door})
   }
 
+    /**
+   * Reset user defined automation to be off.
+   */
+  cancelAutomation() : Observable<Boolean>{
+    return this.http.get<boolean>(`${this.env.apiUrl}/system/resetDoorSettings`)
+  }
+
   /**
    * Get past day worth of door data
    * @returns past day worth of door data

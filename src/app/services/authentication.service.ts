@@ -10,7 +10,8 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
-import { User } from '../models/user'
+import { User, UserObj } from '../models/user'
+import { Role } from '../models/role';
 
 @Injectable({
     providedIn: 'root',
@@ -46,37 +47,55 @@ export class AuthenticationService {
      * @returns The logged in user
      */
     login(username: string, password: string, updateStorage: boolean)  : Observable<User>{
-        let url = "/users/authenticate"
-        return this.http.post<User>(`${this.env.apiUrl}${url}`, { username, password })
-            .pipe(map(user => {
-                // Check if there is a jwt token in the response
-                if (user && user.token && updateStorage) {
-                    // Locally store user obj and jwt token to keep user logged in
-                    localStorage.setItem('currentUser', JSON.stringify(user))
-                    this.currentUserSubject.next(user)
+        let user: UserObj = {
+            door_control: true,
+            name: 'Test User',
+            role: Role.User,
+            username: 'user',
+            verified: true,
+            default_pic: true
+          } 
+      
+          let admin: UserObj = {
+            door_control: true,
+            name: 'Admin User',
+            role: Role.Admin,
+            username: 'admin',
+            verified: true,
+            default_pic: true
+          } 
+
+          let currUser: User;
+          if (username == "user" && password == "password"){
+              currUser = {
+                token: "test",
+                userObj: user
+              }
+          }
+          else if (username == "admin" && password == "password"){
+              currUser = {
+                token: "test",
+                userObj: admin
                 }
-                return user
-            }
-        ))
+        }
+        
+        if (currUser && currUser.token && updateStorage) {
+            // Locally store user obj and jwt token to keep user logged in
+            localStorage.setItem('currentUser', JSON.stringify(currUser))
+            this.currentUserSubject.next(currUser)
+            return of(currUser)
+        }
+
+        throw Observable.throw("Invalid password")
     }
 
     /**
      * Refreshes the current logged in user values
      * @returns the updated logged in user values
      */
-    refreshUser() : Observable<User>{
-        let url = "/users/refreshUser"
-        return this.http.post<User>(`${this.env.apiUrl}${url}`, { })
-            .pipe(map(user => {
-                // Check if there is a jwt token in the response
-                if (user && user.token) {
-                    // Locally store user obj and jwt token to keep user logged in
-                    localStorage.setItem('currentUser', JSON.stringify(user))
-                    this.currentUserSubject.next(user)
-                }
-                return user
-            }
-        ))
+    refreshUser() : Observable<User> {
+        let user = JSON.parse(localStorage.getItem('currentUser'))
+        return of(user)
     }
     /**
      * Logout the current user

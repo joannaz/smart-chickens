@@ -7,9 +7,10 @@
  */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { UserObj } from '../models/user'
 import { environment } from '../../environments/environment'
+import { Role } from '../models/role';
 
 
 @Injectable({
@@ -29,7 +30,29 @@ export class AdminService {
    * @returns Observable of user objects
    */
   getAll(): Observable<UserObj[]> {
-    return this.http.get<UserObj[]>(`${this.env.apiUrl}/admin/getAllUsers`);
+    let user: UserObj = {
+      door_control: true,
+      name: 'Test User',
+      role: Role.User,
+      username: 'user',
+      verified: true,
+      default_pic: true
+    } 
+
+    let admin: UserObj = {
+      door_control: true,
+      name: 'Admin User',
+      role: Role.Admin,
+      username: 'admin',
+      verified: true,
+      default_pic: true
+    } 
+
+    let userArr: UserObj[] = [user, admin]
+    
+    return of(userArr)
+
+    //return this.http.get<UserObj[]>(`${this.env.apiUrl}/admin/getAllUsers`);
   }
 
   /**
@@ -40,7 +63,8 @@ export class AdminService {
    * @returns Observable of true if successfully updated
    */
   updateUser(username: string, field: string, value: string) {
-    return this.http.put<boolean>(`${this.env.apiUrl}/admin/updateUser`, { username, field, value });
+    return of(false)
+    //return this.http.put<boolean>(`${this.env.apiUrl}/admin/updateUser`, { username, field, value });
   }
 
   /**
@@ -49,6 +73,7 @@ export class AdminService {
    * @returns Observable of true if successfully updated
    */
   deleteUser(username: string) {
-    return this.http.delete<boolean>(`${this.env.apiUrl}/admin/deleteUser/${username}`);
+    return of(false)
+    //return this.http.delete<boolean>(`${this.env.apiUrl}/admin/deleteUser/${username}`);
   }
 }
