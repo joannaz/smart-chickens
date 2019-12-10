@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { SourceCode, ToggleActive } from '../models/code'
 import { environment } from '../../environments/environment'
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,35 @@ export class CodeService {
    * @returns Observable of a Source Code Array
    */
   getSourceCode(): Observable<SourceCode[]> {
-    return this.http.get<SourceCode[]>(`${this.env.apiUrl}/code/getSourceCode`);
+    let currentDate = new Date();
+    let oneDayAgoDate = new Date();
+
+    oneDayAgoDate.setDate(currentDate.getDate() - 1);
+
+    let code1: SourceCode = {
+      code: "chicken code",
+      date_created: oneDayAgoDate,
+      last_modified: currentDate,
+      is_active: true,
+      name: "Test Code 1",
+      id: 0
+    }
+
+    let code2: SourceCode = {
+      code: "chicken code 2",
+      date_created: oneDayAgoDate,
+      last_modified: currentDate,
+      is_active: false,
+      name: "Test Code 2",
+      id: 1
+    }
+
+    let codeArr: SourceCode[] = [code1, code2]
+    
+    return of(codeArr)
+
+
+    //return this.http.get<SourceCode[]>(`${this.env.apiUrl}/code/getSourceCode`);
   }
 
   /**
@@ -36,7 +64,8 @@ export class CodeService {
    * @returns Observable of true if successfully updated
    */
   saveCode(sourceCode: SourceCode) : Observable<Boolean> {
-    return this.http.post<Boolean>(`${this.env.apiUrl}/code/updateSourceCode`, { sourceCode });
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<Boolean>(`${this.env.apiUrl}/code/updateSourceCode`, { sourceCode });
   }
 
 /**
@@ -45,7 +74,15 @@ export class CodeService {
    * @returns Observable of ToggleActive
    */
   toggleActive(code: SourceCode) {
-    return this.http.post<ToggleActive>(`${this.env.apiUrl}/code/toggleActiveCode`, { code });
+    let toggleActive :ToggleActive = {
+      compiles: true,
+      saved: true,
+      message: "Error on line x"
+    }
+
+    return of (toggleActive)
+
+    //return this.http.post<ToggleActive>(`${this.env.apiUrl}/code/toggleActiveCode`, { code });
   }
 
   /**
@@ -54,7 +91,8 @@ export class CodeService {
    * @returns Observable of true if successfully deleted
    */
   deleteCode(id: number) : Observable<Boolean> {
-    return this.http.delete<any>(`${this.env.apiUrl}/code/deleteCode/${id}`);
+    throw Observable.throw("Not connected to server")
+    //return this.http.delete<any>(`${this.env.apiUrl}/code/deleteCode/${id}`);
   }
 
   /**
@@ -63,6 +101,7 @@ export class CodeService {
    * @returns true if added
    */
   saveNewCode(code: SourceCode) : Observable<Boolean> {
-    return this.http.post<Boolean>(`${this.env.apiUrl}/code/saveNewCode`, { code });
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<Boolean>(`${this.env.apiUrl}/code/saveNewCode`, { code });
   }
 }
