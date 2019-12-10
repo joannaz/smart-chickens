@@ -23,6 +23,7 @@ export class UpdateService {
      * @param sensor String of sensor name
      */
     updateSensor(sensor: string): Observable<Update> {
-        return this.http.get<Update>(`${this.env.apiUrl}/update/${sensor}`)
+        throw Observable.throw("Not connected to server")
+        //return this.http.get<Update>(`${this.env.apiUrl}/update/${sensor}`)
     }
 }
