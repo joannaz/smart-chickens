@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../environments/environment'
 import { Location } from '../models/location'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
  
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,14 @@ export class SystemService {
    * @returns Observable of Location
    */
   getLocation() : Observable<Location>{
-    return this.http.get<Location>(`${this.env.apiUrl}/system/getLocation`)
+    let loc: Location = {
+      lat: "51.153875",
+      long: "-0.177722"
+    }
+
+    return of(loc)
+
+    //return this.http.get<Location>(`${this.env.apiUrl}/system/getLocation`)
   }
 
   /**
@@ -35,7 +42,8 @@ export class SystemService {
    * @returns Observable of true if saved
    */
   saveLocation(lat : string, long : string) : Observable<boolean> {
-    return this.http.post<any>(`${this.env.apiUrl}/system/updateLocation`, { lat, long })
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<any>(`${this.env.apiUrl}/system/updateLocation`, { lat, long })
   }
 
   /**
@@ -43,7 +51,11 @@ export class SystemService {
    * @returns the Observable with the hub url
    */
   getHubUrl(): Observable<any> {
-    return this.http.get<any>(`${this.env.apiUrl}/system/huburl`)
+    let url = {
+      url: "http://your-hub-url"
+    }
+    return of(url)
+    //return this.http.get<any>(`${this.env.apiUrl}/system/huburl`)
   }
 
   /**
@@ -51,7 +63,8 @@ export class SystemService {
    * @returns Observable of true if updated
    */
   updateHubUrl(url) : Observable<boolean> {
-    return this.http.post<any>(`${this.env.apiUrl}/system/updateHubUrl`, { url })
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<any>(`${this.env.apiUrl}/system/updateHubUrl`, { url })
   }
 
 
@@ -77,8 +90,9 @@ export class SystemService {
    * @returns Observable of true if first time setup needs to be run
    */
   getFirstTimeSetup() : Observable<boolean> {
-    console.log("Test")
-    return this.http.get<boolean>(`${this.env.apiUrl}/system/setup`)
+    return of(false)
+    
+    //return this.http.get<boolean>(`${this.env.apiUrl}/system/setup`)
   }
 
   /**
