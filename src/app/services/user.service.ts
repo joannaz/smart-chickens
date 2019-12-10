@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Emails } from '../models/user'
 import { environment } from '../../environments/environment'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,16 @@ export class UserService {
    * @returns the list of emails as an observable
    */
   getEmail(username: string): Observable<Emails> {
-    return this.http.get<Emails>(`${this.env.apiUrl}/users/emails/${username}`);
+    let email1:string = "myemail@email.com"
+    let email2:string = "test@test.com"
+    let listOfEmails:string[] = [email1, email2]
+    
+    let emails: Emails = {
+      emails: listOfEmails
+    }
+
+    return of(emails)
+    //return this.http.get<Emails>(`${this.env.apiUrl}/users/emails/${username}`);
   }
 
   /**
@@ -35,7 +44,8 @@ export class UserService {
    * @returns Observable of true if successfully updated
    */
   updateUser(username: string, field: string, value: string): Observable<boolean> {
-    return this.http.put<boolean>(`${this.env.apiUrl}/system/updateUser`, { username, field, value });
+    throw Observable.throw("Not connected to server")
+    //return this.http.put<boolean>(`${this.env.apiUrl}/system/updateUser`, { username, field, value });
   }
 
   /**
@@ -44,7 +54,8 @@ export class UserService {
    * @returns Observable of true if successfully updated
    */
   deleteUser(username: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.env.apiUrl}/system/deleteUser/${username}`);
+    throw Observable.throw("Not connected to server")
+    //return this.http.delete<boolean>(`${this.env.apiUrl}/system/deleteUser/${username}`);
   }
 
   /**
@@ -54,7 +65,8 @@ export class UserService {
    * @returns Observable of true if successfully updated
    */
   addEmail(email: string, username: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.env.apiUrl}/users/addEmail`, { email, username })
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<boolean>(`${this.env.apiUrl}/users/addEmail`, { email, username })
   }
 
   /**
@@ -63,7 +75,8 @@ export class UserService {
    * @returns Observable of true if successfully updated
    */
   deleteEmail(email: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.env.apiUrl}/users/deleteEmail/${email}`)
+    throw Observable.throw("Not connected to server")
+    //return this.http.delete<boolean>(`${this.env.apiUrl}/users/deleteEmail/${email}`)
   }
 
   /**
@@ -74,6 +87,7 @@ export class UserService {
    * @returns Observable of true if successfully updated
    */
   changePassword(username: string, oldPassword: string, newPassword: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.env.apiUrl}/users/updatePassword`, { username, oldPassword, newPassword })
+    throw Observable.throw("Not connected to server")
+    //return this.http.post<boolean>(`${this.env.apiUrl}/users/updatePassword`, { username, oldPassword, newPassword })
   }
 }
