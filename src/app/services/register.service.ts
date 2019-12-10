@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
  
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,12 @@ export class RegisterService {
    * @returns Observable of true if username exists
    */
   checkUsernameExists(username: string) : Observable<boolean> {
-    return this.http.get<boolean>(`${this.env.apiUrl}/register/check/${username}`)
+    if(username == "user" || username == "admin") {
+      return of(true)
+    }
+
+    return of(false)
+    //return this.http.get<boolean>(`${this.env.apiUrl}/register/check/${username}`)
   }
 
   /**
@@ -34,7 +39,8 @@ export class RegisterService {
    * @param password user's password
    */
   register(username: string, name: string, email:string , password: string) : Observable<boolean>{
-    let secret = this.env.secret
-    return this.http.post<boolean>(`${this.env.apiUrl}/register/`, {username, name, email, password, secret})
+    throw Observable.throw("Not connected to server")
+    //let secret = this.env.secret
+    //return this.http.post<boolean>(`${this.env.apiUrl}/register/`, {username, name, email, password, secret})
   }
 }
