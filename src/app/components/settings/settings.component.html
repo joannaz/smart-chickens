@@ -9,7 +9,7 @@
                     </div>
                     <div *ngFor="let val of emails?.emails" class="emails">
                         <div class="email-seg py-2 px-2 mb-2">
-                            <span>{{val.email}}</span>
+                            <span>{{val}}</span>
                             <i (click)="deleteEmail(val.email)" class="fas fa-trash delete"></i>
                         </div>
                     </div>
